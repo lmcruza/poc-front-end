@@ -44,8 +44,10 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!thing) { return res.send(404); }
     var updated = _.merge(thing, req.body);
+    updated.increment();
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
+
       return res.json(200, thing);
     });
   });
